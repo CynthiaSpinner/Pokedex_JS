@@ -17,7 +17,7 @@ function FilterSection({ title, options, selected, setSelected }) {
                     <label key={option} className="filter-label">
                         <input
                             type="checkbox"
-                            check={selected.includes(option)}
+                            checked={selected.includes(option)}
                             onChange={() => handleToggle(option)}
                         />
                         <span>{option}</span>
