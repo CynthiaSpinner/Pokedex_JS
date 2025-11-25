@@ -17,6 +17,10 @@ function App() {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedWeaknessess, setSelectedWeaknessess] = useState([]);
 
+  //setting state for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 12; // 3 rows at 4 columns (desktop)
+
   //setting state for loading
   const [loading, setLoading] =useState(true);
 
@@ -61,6 +65,7 @@ function App() {
     }
 
     setFilteredPokemon(filter);
+    setCurrentPage(1); // Reset to page 1 when filters change
   }, [searchName, selectedTypes, selectedWeaknessess, pokemon]);
 
   //getting unique types and weaknesses for filter options
@@ -72,6 +77,20 @@ function App() {
     setSearchName('');
     setSelectedTypes([]);
     setSelectedWeaknessess([]);
+  };
+
+  //pagination calculations
+  const totalPages = Math.ceil(filteredPokemon.length / cardsPerPage);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentPokemon = filteredPokemon.slice(indexOfFirstCard, indexOfLastCard);
+
+  const goToNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
   };
 
   if (loading) {
@@ -118,7 +137,14 @@ function App() {
         )}
       </div>
 
-      <PokemonList pokemon={filteredPokemon} />
+      <PokemonList 
+        pokemon={currentPokemon}
+        totalPokemon={filteredPokemon.length}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onNextPage={goToNextPage}
+        onPreviousPage={goToPreviousPage}
+      />
     </div>
   );
 }
