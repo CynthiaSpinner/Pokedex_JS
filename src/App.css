@@ -7,13 +7,17 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh; 
+  min-height: 100vh;
+  background-attachment: fixed;
+  padding: 20px;
+  overflow-x: hidden;
 }
 
 .App {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;
+  overflow-x: hidden;
 }
 
 /*header*/
@@ -182,6 +186,19 @@ body {
 @media (max-width: 768px) {
   .pokemon-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+/* Responsive max-width adjustments */
+@media (min-width: 1441px) {
+  .App {
+    max-width: 1600px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .App {
+    max-width: 2200px;
   }
 }
 

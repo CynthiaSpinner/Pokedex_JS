@@ -83,7 +83,7 @@ function App() {
   }
   
   return (
-    <div cllassName="App">
+    <div className="App">
       <header className="app-header">
         <h1>Pokemon Index</h1>
         <p className="subtitle">Search and filter through {pokemon.length} Pokemon</p>
